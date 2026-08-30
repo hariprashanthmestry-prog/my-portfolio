@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hariprashanth Mestry - Operations & Automation Executive</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --accent: #f093fb;
+            --dark: #1a1a2e;
+            --light: #f5f7fa;
+            --text: #2d3748;
+            --success: #48bb78;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary);
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            margin-top: 60px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(240, 147, 251, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(30px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 8vw, 4rem);
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideInDown 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2rem;
+            animation: slideInUp 0.8s ease-out 0.4s both;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            animation: slideInUp 0.8s ease-out 0.6s both;
+        }
+
+        .contact-info span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            animation: slideInUp 0.8s ease-out 0.8s both;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border-color: var(--primary);
+            animation: slideInUp 0.8s ease-out 0.9s both;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin-bottom: 3rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* About Section */
+        .about {
+            background: white;
+            border-radius: 20px;
+            padding: 4rem 3rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin: 2rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .about p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        /* Experience Section */
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .experience-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--primary);
+            animation: fadeInUp 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .experience-card:nth-child(1) { animation-delay: 0.1s; }
+        .experience-card:nth-child(2) { animation-delay: 0.2s; }
+        .experience-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .experience-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
+            border-left-color: var(--secondary);
+        }
+
+        .experience-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .experience-card .duration {
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .experience-card p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            animation: fadeInUp 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .skill-category:nth-child(1) { animation-delay: 0.1s; }
+        .skill-category:nth-child(2) { animation-delay: 0.2s; }
+        .skill-category:nth-child(3) { animation-delay: 0.3s; }
+        .skill-category:nth-child(4) { animation-delay: 0.4s; }
+
+        .skill-category h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
+            color: #555;
+        }
+
+        .skill-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        /* Education Section */
+        .education-timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .education-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid var(--success);
+            animation: fadeInUp 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .education-item:nth-child(1) { animation-delay: 0.1s; }
+        .education-item:nth-child(2) { animation-delay: 0.2s; }
+
+        .education-item h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .education-item .school {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            border-radius: 20px;
+            padding: 4rem 2rem;
+            margin: 2rem;
+        }
+
+        .contact h2 {
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-method {
+            flex: 1;
+            min-width: 200px;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .contact-method:nth-child(1) { animation-delay: 0.1s; }
+        .contact-method:nth-child(2) { animation-delay: 0.2s; }
+        .contact-method:nth-child(3) { animation-delay: 0.3s; }
+
+        .contact-method:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .contact-method h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-method a {
+            color: white;
+            text-decoration: none;
+            word-break: break-all;
+        }
+
+        .contact-method a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            nav {
+                padding: 1rem;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            section {
+                padding: 3rem 1.5rem;
+            }
+
+            .about {
+                margin: 1rem;
+                padding: 2rem 1.5rem;
+            }
+
+            .contact {
+                margin: 1rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero {
+                text-align: center;
+            }
+
+            .experience-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease-out;
+        }
+
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: currentColor;
+            border-radius: 50%;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">HM</div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Hariprashanth Mestry</h1>
+            <p style="font-size: 1.3rem; margin-bottom: 1.5rem;">Operations & Automation Executive | Aspiring Full-Stack Developer</p>
+            <div class="contact-info">
+                <span>📍 Mumbai, India</span>
+                <span>📞 +91 7045956679</span>
+                <span>✉️ hariprashanthmestry819@gmail.com</span>
+            </div>
+            <div>
+                <a href="#contact" class="btn btn-primary">Get in Touch</a>
+                <a href="#about" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Me</h2>
+        <div class="about scroll-reveal">
+            <p>
+                I'm a dynamic Operations Executive with over 2 years of hands-on experience in high-volume data management and workflow optimization. I'm a technical problem solver who spent a dedicated year integrating advanced AI productivity tools and writing custom Google Apps Script automation frameworks to eliminate manual bottlenecks.
+            </p>
+            <p>
+                Currently expanding my capabilities through Full-Stack Web Development training to engineer scalable frontend applications. I'm passionate about automating complex workflows, leveraging AI to improve efficiency, and building elegant solutions that solve real-world problems.
+            </p>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <h2>Professional Experience</h2>
+        <div class="experience-grid">
+            <div class="experience-card scroll-reveal">
+                <h3>Operations & Automation Executive</h3>
+                <div class="duration">1 Year | Private Sector</div>
+                <p>
+                    🔧 Architected and deployed custom Google Apps Script code strings to link datasets, cutting out manual administrative tasks<br><br>
+                    📊 Integrated AI tools to accelerate data reporting pipelines, heavily increasing weekly output metrics<br><br>
+                    ⚙️ Monitored transaction pipelines to maintain continuous, fluid operations with zero performance gaps
+                </p>
+            </div>
+            <div class="experience-card scroll-reveal">
+                <h3>Data Management Specialist</h3>
+                <div class="duration">1 Year | Private Sector</div>
+                <p>
+                    📝 Logged, indexed, and audited complex business entry profiles to secure total system reliability<br><br>
+                    🗂️ Organized database structures to assist team lines with rapid and precise info retrieval<br><br>
+                    ✅ Maintained data integrity across multiple platforms and systems
+                </p>
+            </div>
+            <div class="experience-card scroll-reveal">
+                <h3>Technical Development</h3>
+                <div class="duration">Ongoing | Personal Projects</div>
+                <p>
+                    🎨 Developing frontend layouts to cement fluency in responsive layout engines and JavaScript event loops<br><br>
+                    🛠️ Building data-handling macros connecting document fields to spreadsheets, simulating backend data handling patterns<br><br>
+                    💡 Learning React.js and modern web development frameworks
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2>Technical Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-category scroll-reveal">
+                <h3>🤖 Automation & AI</h3>
+                <div class="skill-item"><div class="skill-dot"></div> Google Apps Script</div>
+                <div class="skill-item"><div class="skill-dot"></div> AI Integration</div>
+                <div class="skill-item"><div class="skill-dot"></div> Prompt Engineering</div>
+                <div class="skill-item"><div class="skill-dot"></div> Workflow Optimization</div>
+            </div>
+            <div class="skill-category scroll-reveal">
+                <h3>💻 Web Development</h3>
+                <div class="skill-item"><div class="skill-dot"></div> HTML5</div>
+                <div class="skill-item"><div class="skill-dot"></div> CSS3</div>
+                <div class="skill-item"><div class="skill-dot"></div> JavaScript (ES6+)</div>
+                <div class="skill-item"><div class="skill-dot"></div> React.js (Learning)</div>
+            </div>
+            <div class="skill-category scroll-reveal">
+                <h3>📊 Operations</h3>
+                <div class="skill-item"><div class="skill-dot"></div> High-Accuracy Data Entry</div>
+                <div class="skill-item"><div class="skill-dot"></div> Data Integrity</div>
+                <div class="skill-item"><div class="skill-dot"></div> Verification & Audit</div>
+                <div class="skill-item"><div class="skill-dot"></div> Process Optimization</div>
+            </div>
+            <div class="skill-category scroll-reveal">
+                <h3>⚡ Core Engineering</h3>
+                <div class="skill-item"><div class="skill-dot"></div> Electronics Engineering</div>
+                <div class="skill-item"><div class="skill-dot"></div> Hardware Foundations</div>
+                <div class="skill-item"><div class="skill-dot"></div> Technical Problem Solving</div>
+                <div class="skill-item"><div class="skill-dot"></div> System Architecture</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+        <h2>Education</h2>
+        <div class="education-timeline">
+            <div class="education-item scroll-reveal">
+                <h3>Diploma in Electronics Engineering</h3>
+                <div class="school">Government Polytechnic, Mumbai</div>
+                <p>Comprehensive training in core engineering principles, hardware foundations, and technical problem-solving</p>
+            </div>
+            <div class="education-item scroll-reveal">
+                <h3>12th Grade (PCMB)</h3>
+                <div class="school">Patuck Technical High School</div>
+                <p>Strong foundation in Physics, Chemistry, Mathematics, and Biology</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="contact">
+            <h2>Let's Connect</h2>
+            <p style="margin-bottom: 2rem; font-size: 1.1rem;">I'm always open to new opportunities and collaborations. Reach out today!</p>
+            <div class="contact-methods">
+                <div class="contact-method scroll-reveal">
+                    <h3>📞 Phone</h3>
+                    <a href="tel:+917045956679">+91 7045956679</a>
+                </div>
+                <div class="contact-method scroll-reveal">
+                    <h3>✉️ Email</h3>
+                    <a href="mailto:hariprashanthmestry819@gmail.com">hariprashanthmestry819@gmail.com</a>
+                </div>
+                <div class="contact-method scroll-reveal">
+                    <h3>📍 Location</h3>
+                    <p>Mumbai, Maharashtra, India</p>
+                </div>
+            </div>
+            <a href="mailto:hariprashanthmestry819@gmail.com" class="btn btn-secondary">Send Me an Email</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Hariprashanth Mestry. All rights reserved.</p>
+        <p>Crafted with passion | Operations & Automation | Full-Stack Developer</p>
+    </footer>
+
+<script src="./index.js"></script>
+</body>
+</html>
